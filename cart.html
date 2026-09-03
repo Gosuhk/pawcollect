@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>批發單｜爪集</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{font-family:"Noto Sans TC",system-ui,sans-serif}</style>
+</head>
+<body data-page="cart" class="bg-slate-900 text-slate-100 antialiased">
+<header id="siteHeader" class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800"></header>
+<main class="max-w-3xl mx-auto px-4 py-10">
+  <h1 class="text-4xl font-extrabold">批發單</h1>
+  <div id="box" class="mt-8"></div>
+</main>
+<footer id="siteFooter" class="border-t border-slate-800 bg-slate-950 mt-16"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+const lines = JSON.parse(localStorage.getItem("pc_cart")||"[]");
+const s = PC.session();
+if(!s || s.role!=="retailer"){
+  box.innerHTML = `<p class="text-slate-400">請以零售商登入後下單。</p><button onclick="openModal()" class="mt-4 bg-orange-500 px-5 py-3 rounded-xl">登入</button>`;
+} else if(!lines.length){
+  box.innerHTML = `<p class="text-slate-400">尚未加入貨品。</p><a href="catalog.html" class="mt-4 inline-block text-orange-400">去批發專區</a>`;
+} else {
+  const rows = lines.map(l=>{const p=PC.PRODUCTS.find(x=>x.id===l.id); return {...l,p,sub:p.wholesale*l.qty}});
+  const total = rows.reduce((a,r)=>a+r.sub,0);
+  box.innerHTML = `<ul class="space-y-3">${rows.map(r=>`<li class="flex justify-between rounded-xl border border-slate-700 bg-slate-800 p-4"><span>${r.p.name} × ${r.qty}<br><span class="text-xs text-slate-500">${r.p.supplier}／${r.p.brand}</span></span><span class="text-orange-400">${PC.money(r.sub)}</span></li>`).join("")}</ul>
+    <p class="mt-4 font-bold">合計 ${PC.money(total)}</p>
+    <button onclick="localStorage.setItem('pc_cart','[]');PC.toast('已提交（示範不扣款）');location.href='catalog.html'" class="mt-4 bg-orange-500 px-5 py-3 rounded-xl font-semibold">提交批發單</button>`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>匯入貨盤｜爪集</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>body{font-family:"Noto Sans TC",system-ui,sans-serif}</style>
+</head>
+<body data-page="import" class="bg-slate-900 text-slate-100 antialiased">
+<header id="siteHeader" class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800"></header>
+<main class="max-w-3xl mx-auto px-4 py-10">
+  <p class="text-xs tracking-[0.18em] text-slate-500">SUPPLIER IMPORT</p>
+  <h1 class="mt-2 text-4xl font-extrabold">匯入貨盤</h1>
+  <p class="mt-3 text-slate-400">CSV 必須有品牌欄。冇品牌的列不會進入目錄。正式流程是匯入 → 待審 → 上架，並按 供應商 → 品牌 → 種類 出現。</p>
+  <ol class="mt-8 grid md:grid-cols-3 gap-4">
+    <li class="rounded-xl border border-slate-700 bg-slate-800 p-5"><p class="text-orange-400 text-xs">1</p><p class="mt-2 font-bold">下載範本</p><p class="mt-2 text-sm text-slate-400">欄位含 sku、name、<strong>brand</strong>、category、MOQ、批發價。</p></li>
+    <li class="rounded-xl border border-slate-700 bg-slate-800 p-5"><p class="text-orange-400 text-xs">2</p><p class="mt-2 font-bold">對應品牌</p><p class="mt-2 text-sm text-slate-400">品牌須屬該供應商的自有或代理牌。空白品牌一律剔除。</p></li>
+    <li class="rounded-xl border border-slate-700 bg-slate-800 p-5"><p class="text-orange-400 text-xs">3</p><p class="mt-2 font-bold">送出待審</p><p class="mt-2 text-sm text-slate-400">通過後按 供應商 → 品牌 → 種類 出現在目錄。</p></li>
+  </ol>
+  <label class="mt-8 block text-sm font-bold">示範校驗（可貼入 CSV）</label>
+  <textarea id="csvBox" class="mt-3 w-full min-h-36 rounded-xl border border-slate-700 bg-slate-950 p-4 text-xs text-slate-300">sku,name,brand,category,moq,wholesale
+PC-IM-1001,成犬鮮肉糧示範裝 2kg,北島鮮肉,food,6,88
+PC-IM-2008,潔齒棒示範盒,齒研所,treats,12,36
+PC-IM-9001,無品牌示範列,,toys,10,20</textarea>
+  <button onclick="checkCsv()" class="mt-4 bg-orange-500 rounded-lg px-5 py-2.5 text-sm font-semibold">檢查品牌欄</button>
+  <div id="csvOut" class="mt-4 text-sm text-slate-400"></div>
+</main>
+<footer id="siteFooter" class="border-t border-slate-800 bg-slate-950 mt-16"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+function checkCsv(){
+  const lines = document.getElementById("csvBox").value.trim().split(/\n+/);
+  const head = lines.shift();
+  if(!head || !head.split(",").map(s=>s.trim().toLowerCase()).includes("brand")){
+    csvOut.innerHTML = '<p class="text-red-400">缺少 brand 欄，整份貨盤不會入目錄。</p>';
+    return;
+  }
+  const cols = head.split(",").map(s=>s.trim().toLowerCase());
+  const bi = cols.indexOf("brand");
+  const ni = cols.indexOf("name");
+  const ok=[], bad=[];
+  lines.forEach((line,i)=>{
+    const cells = line.split(",");
+    const brand = (cells[bi]||"").trim();
+    const name = (cells[ni]||line).trim();
+    if(brand) ok.push(name); else bad.push((i+2)+". "+name);
+  });
+  csvOut.innerHTML = `<p class="text-emerald-400">可入目錄：${ok.length} 列</p><p class="${bad.length?"text-red-400":"text-slate-500"}">剔除（冇品牌）：${bad.length} 列${bad.length? " — "+bad.join("；"):""}</p>`;
+}
+</script>
+</body>
+</html>

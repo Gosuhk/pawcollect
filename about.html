@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>關於我們｜爪集</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>body{font-family:"Noto Sans TC",system-ui,sans-serif}</style>
+</head>
+<body data-page="about" class="bg-slate-900 text-slate-100 antialiased">
+<header id="siteHeader" class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800"></header>
+<main class="max-w-5xl mx-auto px-4 py-10">
+  <p class="text-xs tracking-[0.18em] text-slate-500">VISION × MISSION × VALUE</p>
+  <h1 class="mt-2 text-4xl font-extrabold">關於爪集</h1>
+  <section class="mt-10 rounded-2xl border border-slate-700 bg-slate-800 p-8">
+    <h2 class="text-sm tracking-widest text-orange-400">VISION 願景</h2>
+    <p class="mt-3 text-2xl font-extrabold leading-snug">成為大中華區最值得信賴的 B2B 寵物用品批發網絡，連結優質寵物用品供應商與零售商，推動高效、透明的商業流通。</p>
+  </section>
+  <section class="mt-6 rounded-2xl border border-slate-700 bg-slate-800 p-8">
+    <h2 class="text-sm tracking-widest text-orange-400">MISSION 使命</h2>
+    <p class="mt-3 text-lg leading-relaxed">我們致力於打造一個簡單、可靠、高效率的寵物用品批發平台，幫助供應商穩定出貨、零售商輕鬆採購，降低交易成本。</p>
+  </section>
+  <h2 class="mt-12 text-2xl font-extrabold">核心價值觀</h2>
+  <div id="vals" class="mt-6 grid sm:grid-cols-2 gap-4"></div>
+</main>
+<footer id="siteFooter" class="border-t border-slate-800 bg-slate-950 mt-16"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>vals.innerHTML = PC.VALUES.map(([t,d])=>`<article class="rounded-2xl border border-slate-700 bg-slate-800 p-6"><h3 class="font-bold">${t}</h3><p class="mt-2 text-sm text-slate-400 leading-relaxed">${d}</p></article>`).join("");</script>
+</body>
+</html>

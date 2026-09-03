@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>申請零售開戶｜爪集</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>body{font-family:"Noto Sans TC",system-ui,sans-serif}</style>
+</head>
+<body data-page="apply" class="bg-slate-900 text-slate-100 antialiased">
+<header id="siteHeader" class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800"></header>
+<main class="max-w-xl mx-auto px-4 py-10">
+  <h1 class="text-4xl font-extrabold">申請零售開戶</h1>
+  <p class="mt-3 text-slate-400">通過後可解鎖批發價。示範站提交即開通。</p>
+  <form class="mt-8 space-y-4 rounded-2xl border border-slate-700 bg-slate-800 p-6" onsubmit="event.preventDefault(); pcLogin('retailer')">
+    <input required placeholder="店舖名稱" class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" />
+    <input required placeholder="聯絡人" class="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2" />
+    <button class="w-full bg-orange-500 rounded-lg py-3 font-semibold">提交申請（示範即開通）</button>
+  </form>
+</main>
+<footer id="siteFooter" class="border-t border-slate-800 bg-slate-950 mt-16"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
