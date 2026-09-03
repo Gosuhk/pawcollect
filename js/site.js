@@ -1,3 +1,6 @@
+if (!window.PC || !PC.PRODUCTS) {
+  document.write('<script src="js/products.js"><\/script>');
+}
 (function () {
   const KEY = "pc_member";
   const CART = "pc_cart";
@@ -49,8 +52,8 @@
         <a href="index.html" class="flex items-center gap-3">
           <span class="bg-orange-500 text-white w-10 h-10 rounded-xl flex items-center justify-center"><i class="fa-solid fa-paw"></i></span>
           <span>
-            <span class="text-xl font-extrabold">PetWholesale<span class="text-orange-500">Pro</span></span>
-            <span class="block text-xs text-slate-400">爪集 · B2B Pet Supplies Hub</span>
+            <span class="text-xl font-extrabold">爪集 <span class="text-orange-500">PawCollect</span></span>
+            <span class="block text-xs text-slate-400">B2B 寵物用品批發</span>
           </span>
         </a>
         <nav class="hidden md:flex items-center gap-7 text-sm font-medium">
@@ -62,7 +65,7 @@
         <div class="flex items-center gap-3">
           ${s ? `<button onclick="pcLogout()" class="hidden sm:block text-sm text-slate-300">${s.company}</button>` : ""}
           <a href="cart.html" class="text-sm border border-slate-700 rounded-lg px-3 py-2">批發單 <span id="cartCount">${count}</span></a>
-          ${s ? "" : `<button onclick="openModal()" class="text-sm border border-orange-500 text-orange-400 px-4 py-2 rounded-lg hover:bg-orange-500 hover:text-white">批發商登入 / 審核</button>`}
+          ${s ? "" : `<button onclick="openModal()" class="text-sm border border-orange-500 text-orange-400 px-4 py-2 rounded-lg hover:bg-orange-500 hover:text-white">批發登入</button>`}
         </div>
       </div>`;
   }
@@ -71,8 +74,8 @@
     footer.innerHTML = `
       <div class="max-w-7xl mx-auto px-4 py-12 grid gap-10 md:grid-cols-4">
         <div class="md:col-span-2">
-          <p class="text-xl font-extrabold">PetWholesale<span class="text-orange-500">Pro</span></p>
-          <p class="mt-3 max-w-md text-sm text-slate-400 leading-relaxed">爪集 · 大中華區最值得信賴的 B2B 寵物用品批發網絡。連結優質供應商與零售商，推動高效、透明的商業流通。</p>
+          <p class="text-xl font-extrabold">爪集 <span class="text-orange-500">PawCollect</span></p>
+          <p class="mt-3 max-w-md text-sm text-slate-400 leading-relaxed">大中華區 B2B 寵物用品批發網絡。目錄按供應商 → 品牌 → 種類排列；訪客看不到批發價。</p>
         </div>
         <div>
           <p class="text-xs tracking-widest text-slate-500">目錄</p>
@@ -95,7 +98,7 @@
     m.innerHTML = `
       <div class="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900 p-6">
         <div class="flex justify-between items-center">
-          <h2 class="text-xl font-extrabold">批發會員身分驗證</h2>
+          <h2 class="text-xl font-extrabold">批發會員驗證</h2>
           <button onclick="closeModal()" class="text-slate-400">關閉</button>
         </div>
         <p class="mt-2 text-sm text-slate-400">示範站填公司名稱即可解鎖。正式版本需審核。</p>
