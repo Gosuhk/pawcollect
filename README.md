@@ -1,15 +1,17 @@
-# 爪集 PetWholesale Pro
+# 爪集 PawCollect（PetWholesale Pro）
 
-B2B 寵物用品批發網示範站。
+B2B 寵物用品批發網。目錄排序：供應商 → 品牌 → 種類。無品牌 SKU 不入目錄。
 
-## 即時預覽
+## 開啟 GitHub Pages
 
-1. 開 [GitHub Pages 設定](https://github.com/Gosuhk/pawcollect/settings/pages)
-2. Source 選 **Deploy from a branch**
-3. Branch 選 **main**，資料夾選 **/ (root)**
-4. Save 後約 1 分鐘刷新：
-   - 首頁：https://gosuhk.github.io/pawcollect/
-   - 批發專區：https://gosuhk.github.io/pawcollect/catalog.html
-   - 供應商：https://gosuhk.github.io/pawcollect/suppliers.html
+1. 開 [Pages 設定](https://github.com/Gosuhk/pawcollect/settings/pages)
+2. Source 選 **Deploy from a branch**，Branch 選 **main**、資料夾 **/ (root)**
+3. 或等 Actions workflow `Deploy GitHub Pages`
 
-目錄排序：供應商 → 品牌 → 種類。無品牌 SKU 不入目錄。
+預計網址：
+
+- https://gosuhk.github.io/pawcollect/
+- https://gosuhk.github.io/pawcollect/catalog.html
+- https://gosuhk.github.io/pawcollect/suppliers.html
+
+示範登入：右上「批發商登入」→ 填店名 → 選零售商，即可解鎖批發價。
