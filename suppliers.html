@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>供應商網絡｜爪集</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet" />
+<style>body{font-family:"Noto Sans TC",system-ui,sans-serif}</style>
+</head>
+<body data-page="suppliers" class="bg-slate-900 text-slate-100 antialiased">
+<header id="siteHeader" class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800"></header>
+<main class="max-w-7xl mx-auto px-4 py-10">
+  <p class="text-xs tracking-[0.18em] text-slate-500">SUPPLIER × BRAND</p>
+  <h1 class="mt-2 text-4xl font-extrabold">供應商網絡</h1>
+  <p class="mt-3 max-w-2xl text-slate-400">零售商先認供應商，再認品牌。每家供應商介紹自有或代理品牌，目錄按 供應商 → 品牌 → 種類 排列。</p>
+  <div class="mt-6"><a href="supplier-apply.html" class="inline-block border border-slate-600 rounded-lg px-4 py-2 text-sm">申請入駐</a></div>
+  <div id="list" class="mt-10 space-y-8"></div>
+</main>
+<footer id="siteFooter" class="border-t border-slate-800 bg-slate-950 mt-16"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+document.getElementById("list").innerHTML = PC.SUPPLIERS.map(s => {
+  const items = PC.listed().filter(p => p.sid === s.id);
+  const own = s.brands.filter(b => b.type === "自有品牌").length;
+  const agency = s.brands.filter(b => b.type === "代理品牌").length;
+  return `<article id="${s.id}" class="rounded-2xl border border-slate-700 bg-slate-800 p-6">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+      <div>
+        <p class="text-xs text-slate-500">${s.origin} · 自 ${s.since} · ${s.role}</p>
+        <h2 class="mt-2 text-2xl font-extrabold">${s.name}</h2>
+        <p class="text-sm text-slate-400">${s.nameEn}</p>
+      </div>
+      <p class="text-xs text-slate-500">自有 ${own} · 代理 ${agency} · 在架 ${items.length} SKU</p>
+    </div>
+    <p class="mt-3 text-sm text-slate-300 leading-relaxed">${s.blurb}</p>
+    <h3 class="mt-6 text-sm font-bold text-slate-400">旗下／代理品牌</h3>
+    <div class="mt-3 grid md:grid-cols-3 gap-3">
+      ${s.brands.map(b => {
+        const n = items.filter(p => p.brand === b.name).length;
+        return `<a href="catalog.html?sup=${encodeURIComponent(s.name)}&brand=${encodeURIComponent(b.name)}" class="rounded-xl border border-slate-700 bg-slate-900 p-4 hover:border-orange-500">
+          <p class="text-xs text-orange-400">${b.type}</p>
+          <p class="mt-1 font-bold">${b.name}</p>
+          <p class="mt-1 text-sm text-slate-400">${b.line}</p>
+          <p class="mt-2 text-xs leading-relaxed text-slate-500">${b.note || ""}</p>
+          <p class="mt-3 text-xs text-orange-400">${n} 款在架 · 前往目錄</p>
+        </a>`;
+      }).join("")}
+    </div>
+  </article>`;
+}).join("");
+</script>
+</body>
+</html>
